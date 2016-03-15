@@ -20,8 +20,9 @@ class ViewController: UIViewController {
         // Assign and check by zip code
         if zipCodeField.text != "" {
             
-            // Variable to city name
+            // Variable to city name and truncated city name
             var cityString = " "
+            var truncatedCityString = " "
             
             if zipCodeField.text!.characters.count < 4 || zipCodeField.text!.characters.count > 5 {
                 weatherResultLabel.text = "That is not a valid zip code. Try again."
@@ -49,6 +50,15 @@ class ViewController: UIViewController {
                                 var cityNameArray = urlContentArray[1].componentsSeparatedByString("</p>")
                                 cityString = cityNameArray[0] as String
                                 print(cityString)
+                                
+                                // After getting name by zip code, assign it to the city name text field.
+                                // Drop the last three characters, which are the state and a space, then assign to a truncated string
+                                let cityStringLength = cityString.startIndex.advancedBy(cityString.characters.count - 3)
+                                truncatedCityString = cityString.substringToIndex(cityStringLength)
+                                
+                                print("Truncated string = \(truncatedCityString)")
+                                
+                                //cityNameField.text = cityString
                             }
                         }
                 
@@ -65,6 +75,7 @@ class ViewController: UIViewController {
                             }
                             else {
                                 self.weatherResultLabel.text = cityString
+                                self.cityNameField.text = truncatedCityString
                             }
                         }
                         
@@ -76,6 +87,7 @@ class ViewController: UIViewController {
                     showError()
                 }
             }
+           
         }
 
 
