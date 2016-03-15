@@ -97,6 +97,7 @@
 		04A2A9281C970C2C00EE316E /* JasonShepherdWeatherApp */ = {
 			isa = PBXGroup;
 			children = (
+				04A2A9571C9724ED00EE316E /* assets */,
 				04A2A9291C970C2C00EE316E /* AppDelegate.swift */,
 				04A2A92B1C970C2C00EE316E /* ViewController.swift */,
 				04A2A92D1C970C2C00EE316E /* Main.storyboard */,
@@ -123,6 +124,13 @@
 				04A2A94B1C970C2D00EE316E /* Info.plist */,
 			);
 			path = JasonShepherdWeatherAppUITests;
+			sourceTree = "<group>";
+		};
+		04A2A9571C9724ED00EE316E /* assets */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = assets;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
