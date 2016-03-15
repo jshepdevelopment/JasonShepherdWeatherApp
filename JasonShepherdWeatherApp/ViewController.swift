@@ -15,59 +15,124 @@ class ViewController: UIViewController {
     @IBOutlet weak var weatherResultLabel: UILabel!
     
     @IBAction func searchButton(sender: AnyObject) {
-            // Occurs on button tap
-        // Assign url to string
-        let url = NSURL(string: "http://www.weather-forecast.com/locations/" + cityNameField.text!.stringByReplacingOccurrencesOfString(" ", withString: "-") + "/forecasts/latest")
+        // Occurs on button tap
         
-        if url != nil {
-            // Creating an asynchronous web session
-            let task = NSURLSession.sharedSession().dataTaskWithURL(url!, completionHandler: {
-                (data, response, error) -> Void in
+        // Assign and check by zip code
+        if zipCodeField.text != "" {
+            
+            // Variable to city name
+            var cityString = " "
+            
+            if zipCodeField.text!.characters.count < 4 || zipCodeField.text!.characters.count > 5 {
+                weatherResultLabel.text = "That is not a valid zip code. Try again."
+            }
+            else {
+                let url = NSURL(string: "https://tools.usps.com/go/ZipLookupResultsAction!input.action?resultMode=2&postalCode=" + zipCodeField.text!)
                 
-                // Check if for any session error
-                var urlError = false
+                if url != nil {
+                    // Creating an asynchronous web session
+                    let task = NSURLSession.sharedSession().dataTaskWithURL(url!, completionHandler: {
+                        (data, response, error) -> Void in
+                        
+                        // Check if for any session error
+                        var urlError = false
+                        
+                        // Get successful display contents
+                        if error == nil {
+                            let urlContent = NSString(data: data!, encoding: NSUTF8StringEncoding) as NSString!
+                            let urlContentArray = urlContent.componentsSeparatedByString("<p class=\"std-address\">")
+                            
+                            // Make sure the paragraph exists
+                            if urlContentArray.count > 0 {
+                                
+                                // Get the city name from the html
+                                var cityNameArray = urlContentArray[1].componentsSeparatedByString("</p>")
+                                cityString = cityNameArray[0] as String
+                                print(cityString)
+                            }
+                        }
                 
-                var weather = ""
-                
-                // Get successful dispplay contents
-                if error == nil {
-                    let urlContent = NSString(data: data!, encoding: NSUTF8StringEncoding) as NSString!
-                    
-                    let urlContentArray = urlContent.componentsSeparatedByString("<span class=\"phrase\">")
-                    
-                    
-                    // Make sure span exists
-                    if urlContentArray.count > 0 {
+                        else {
+                            // Error
+                            urlError = true
+                        }
                         
-                        var weatherArray = urlContentArray[1].componentsSeparatedByString("</span>")
-                        weather = weatherArray[0] as String
+                        dispatch_async(dispatch_get_main_queue()) {
+                            
+                            // Show the error message if necessary
+                            if urlError == true {
+                                self.showError()
+                            }
+                            else {
+                                self.weatherResultLabel.text = cityString
+                            }
+                        }
                         
-                        weather = weather.stringByReplacingOccurrencesOfString("&deg;", withString: "°")
-                        
-                    }
+                    })
+                    task.resume(); // Resuming normal activity
+                    
                 }
                 else {
-                    // Error
-                    urlError = true
+                    showError()
                 }
+            }
+        }
+
+
+        // Assign and check by name
+        else {
+            // Assign url to string
+            let url = NSURL(string: "http://www.weather-forecast.com/locations/" + cityNameField.text!.stringByReplacingOccurrencesOfString(" ", withString: "-") + "/forecasts/latest")
+        
+            if url != nil {
+            // Creating an asynchronous web session
+                let task = NSURLSession.sharedSession().dataTaskWithURL(url!, completionHandler: {
+                    (data, response, error) -> Void in
                 
-                dispatch_async(dispatch_get_main_queue()) {
+                    // Check if for any session error
+                    var urlError = false
+               
+                    var weather = ""
+                
+                    // Get successful dispplay contents
+                    if error == nil {
+                        let urlContent = NSString(data: data!, encoding: NSUTF8StringEncoding) as NSString!
                     
-                    // Show the error message if necessary
-                    if urlError == true {
-                        self.showError()
+                        let urlContentArray = urlContent.componentsSeparatedByString("<span class=\"phrase\">")
+                    
+                        // Make sure span exists
+                        if urlContentArray.count > 0 {
+                        
+                            var weatherArray = urlContentArray[1].componentsSeparatedByString("</span>")
+                            weather = weatherArray[0] as String
+                        
+                            weather = weather.stringByReplacingOccurrencesOfString("&deg;", withString: "°")
+                        
+                        }
                     }
                     else {
-                        self.weatherResultLabel.text = weather
+                        // Error
+                        urlError = true
                     }
-                }
                 
-            })
-            task.resume(); // Resuming normal activity
+                    dispatch_async(dispatch_get_main_queue()) {
+                    
+                        // Show the error message if necessary
+                        if urlError == true {
+                            self.showError()
+                        }
+                        else {
+                            self.weatherResultLabel.text = weather
+                        }
+                    }
+                
+                })
+                task.resume(); // Resuming normal activity
             
-        }
-        else {
-            showError()
+            }
+            else {
+                showError()
+            }
         }
     }
     
