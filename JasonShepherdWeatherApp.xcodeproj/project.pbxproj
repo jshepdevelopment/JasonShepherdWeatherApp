@@ -14,6 +14,7 @@
 		04A2A9341C970C2C00EE316E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 04A2A9321C970C2C00EE316E /* LaunchScreen.storyboard */; };
 		04A2A93F1C970C2D00EE316E /* JasonShepherdWeatherAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A2A93E1C970C2D00EE316E /* JasonShepherdWeatherAppTests.swift */; };
 		04A2A94A1C970C2D00EE316E /* JasonShepherdWeatherAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A2A9491C970C2D00EE316E /* JasonShepherdWeatherAppUITests.swift */; };
+		04A2A95F1C99A5B300EE316E /* appBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = 04A2A95E1C99A5B300EE316E /* appBackground.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +48,7 @@
 		04A2A9451C970C2D00EE316E /* JasonShepherdWeatherAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = JasonShepherdWeatherAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		04A2A9491C970C2D00EE316E /* JasonShepherdWeatherAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JasonShepherdWeatherAppUITests.swift; sourceTree = "<group>"; };
 		04A2A94B1C970C2D00EE316E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		04A2A95E1C99A5B300EE316E /* appBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = appBackground.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -129,6 +131,7 @@
 		04A2A9571C9724ED00EE316E /* assets */ = {
 			isa = PBXGroup;
 			children = (
+				04A2A95E1C99A5B300EE316E /* appBackground.png */,
 			);
 			name = assets;
 			sourceTree = "<group>";
@@ -238,6 +241,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				04A2A9341C970C2C00EE316E /* LaunchScreen.storyboard in Resources */,
+				04A2A95F1C99A5B300EE316E /* appBackground.png in Resources */,
 				04A2A9311C970C2C00EE316E /* Assets.xcassets in Resources */,
 				04A2A92F1C970C2C00EE316E /* Main.storyboard in Resources */,
 			);

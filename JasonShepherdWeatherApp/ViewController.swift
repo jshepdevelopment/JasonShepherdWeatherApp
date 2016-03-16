@@ -15,6 +15,18 @@ class ViewController: UIViewController {
     var checkByZip = true
     var dontCheck = false
     
+    @IBOutlet weak var progressLabel: UILabel!
+    @IBOutlet weak var progressView: UIProgressView!
+    var counter:Int = 0 {
+        didSet {
+            let fractionalProgress = Float(counter) / 100.0
+            let animated = counter != 0
+            
+            progressView.setProgress(fractionalProgress, animated: animated)
+            progressLabel.text = ("\(counter)%")
+        }
+    }
+    
     @IBOutlet weak var cityNameField: UITextField!
     @IBOutlet weak var zipCodeField: UITextField!
     @IBOutlet weak var weatherResultLabel: UILabel!
@@ -84,7 +96,9 @@ class ViewController: UIViewController {
                             urlError = true
                         }
                         
-                        dispatch_async(dispatch_get_main_queue()) {
+                        
+
+                            dispatch_async(dispatch_get_main_queue(), {
                             
                             // Show the error message if necessary
                             if urlError == true {
@@ -95,11 +109,11 @@ class ViewController: UIViewController {
                                 self.cityNameField.text = truncatedCityString
                                 self.getWeather(truncatedCityString)
                             }
-                        }
-                       
+                            
+                        })
+
                     })
                     task.resume() // Resuming normal activity
-                    // Update global cityNameField so name can be used in finding weather
                     
                 }
                 else {
@@ -120,7 +134,8 @@ class ViewController: UIViewController {
     func getWeather(globalCityName: String) {
         // Only attempt if given the green flag
         if dontCheck == false {
-            
+            progressLabel.text = "0%"
+            self.counter = 0
             // Assign url to string
             let url = NSURL(string: "http://www.weather-forecast.com/locations/" + globalCityName.stringByReplacingOccurrencesOfString(" ", withString: "-") + "/forecasts/latest")
             
@@ -160,17 +175,21 @@ class ViewController: UIViewController {
                         urlError = true
                     }
                     
-                    dispatch_async(dispatch_get_main_queue()) {
-                        
-                        // Show the error message if necessary
-                        if urlError == true {
-                            self.showError()
-                        }
-                        else {
-                            self.weatherResultLabel.text = weather
-                        }
+                    for _ in 0..<100 {
+                    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), {
+                            dispatch_async(dispatch_get_main_queue(), {
+                                self.counter++
+                                // Show the error message if necessary
+                                if urlError == true {
+                                    self.showError()
+                                }
+                                else {
+                                    self.weatherResultLabel.text = weather
+                                
+                                }
+                            })
+                        })
                     }
-                    
                 })
                 task.resume(); // Resuming normal activity
                 
@@ -187,6 +206,7 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        progressView.setProgress(0, animated: true)
     }
 
     override func didReceiveMemoryWarning() {
