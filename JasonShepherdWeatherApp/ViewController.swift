@@ -174,7 +174,6 @@ class ViewController: UIViewController {
                         urlError = true
                     }
                     
-
                     dispatch_async(dispatch_get_main_queue(), {
 
                         // Show the error message if necessary
@@ -188,10 +187,12 @@ class ViewController: UIViewController {
                             self.startLoadingWebView()
                             self.webView.loadRequest(webViewRequest)
                             self.finishLoadingWebView()
+
                         }
                     })
                 })
                 task.resume(); // Resuming normal activity
+
                 
             }
             else {
@@ -234,7 +235,7 @@ class ViewController: UIViewController {
             if self.progressView.progress >= 0.95 {
                 self.progressView.progress = 0.95
                 self.progressLabelCounter = self.progressView.progress * 100.0
-                self.progressLabel.text = String("\(progressLabelCounter)%")
+                self.progressLabel.text = String("Finished!")
             }
         }
     }
