@@ -14,19 +14,15 @@ class ViewController: UIViewController {
     // Boolean flags for error checking
     var checkByZip = true
     var dontCheck = false
+    var progressBool = true
     
+    var myTimer: NSTimer!
+    var progressLabelCounter: Float!
+    
+    // Outlets to UI elements
+    @IBOutlet weak var webView: UIWebView!
     @IBOutlet weak var progressLabel: UILabel!
     @IBOutlet weak var progressView: UIProgressView!
-    var counter:Int = 0 {
-        didSet {
-            let fractionalProgress = Float(counter) / 100.0
-            let animated = counter != 0
-            
-            progressView.setProgress(fractionalProgress, animated: animated)
-            progressLabel.text = ("\(counter)%")
-        }
-    }
-    
     @IBOutlet weak var cityNameField: UITextField!
     @IBOutlet weak var zipCodeField: UITextField!
     @IBOutlet weak var weatherResultLabel: UILabel!
@@ -55,6 +51,7 @@ class ViewController: UIViewController {
             }
                 
             else {
+                // A valid zip code exists, therefor check
                 dontCheck = false
                 
                 let url = NSURL(string: "https://tools.usps.com/go/ZipLookupResultsAction!input.action?resultMode=2&postalCode=" + zipCodeField.text!)
@@ -70,6 +67,8 @@ class ViewController: UIViewController {
                         // Get successful display contents
                         if error == nil {
                             let urlContent = NSString(data: data!, encoding: NSUTF8StringEncoding) as NSString!
+                            
+                            
                             let urlContentArray = urlContent.componentsSeparatedByString("<p class=\"std-address\">")
                             
                             // Make sure the paragraph exists
@@ -132,19 +131,21 @@ class ViewController: UIViewController {
     
     // Function to get weather based on information passed from button
     func getWeather(globalCityName: String) {
+        
         // Only attempt if given the green flag
         if dontCheck == false {
-            progressLabel.text = "0%"
-            self.counter = 0
+           
             // Assign url to string
             let url = NSURL(string: "http://www.weather-forecast.com/locations/" + globalCityName.stringByReplacingOccurrencesOfString(" ", withString: "-") + "/forecasts/latest")
+
+            // Set up a NSURLRequest to populate webView later
+            let webViewRequest = NSURLRequest(URL: url!)
             
+            // Print some stuff to console for debugging purposes
             print("global city name is \(globalCityName)")
-            
-            //let url = NSURL(string: "http://www.weather-forecast.com/locations/" + globalCityName)
-            
             print("url is \(url)")
             
+            // Proceed if the url is good
             if url != nil {
                 // Creating an asynchronous web session
                 let task = NSURLSession.sharedSession().dataTaskWithURL(url!, completionHandler: {
@@ -152,7 +153,6 @@ class ViewController: UIViewController {
                     
                     // Check if for any session error
                     var urlError = false
-                    
                     var weather = ""
                     
                     // Get successful dispplay contents
@@ -165,7 +165,6 @@ class ViewController: UIViewController {
                             
                             var weatherArray = urlContentArray[1].componentsSeparatedByString("</span>")
                             weather = weatherArray[0] as String
-                            
                             weather = weather.stringByReplacingOccurrencesOfString("&deg;", withString: "°")
                             
                         }
@@ -175,21 +174,22 @@ class ViewController: UIViewController {
                         urlError = true
                     }
                     
-                    for _ in 0..<100 {
-                    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), {
-                            dispatch_async(dispatch_get_main_queue(), {
-                                self.counter++
-                                // Show the error message if necessary
-                                if urlError == true {
-                                    self.showError()
-                                }
-                                else {
-                                    self.weatherResultLabel.text = weather
-                                
-                                }
-                            })
-                        })
-                    }
+
+                    dispatch_async(dispatch_get_main_queue(), {
+
+                        // Show the error message if necessary
+                        if urlError == true {
+                            self.showError()
+                        }
+                        else {
+                            
+                            // Everything good, so populate label and webView
+                            self.weatherResultLabel.text = weather
+                            self.startLoadingWebView()
+                            self.webView.loadRequest(webViewRequest)
+                            self.finishLoadingWebView()
+                        }
+                    })
                 })
                 task.resume(); // Resuming normal activity
                 
@@ -202,6 +202,41 @@ class ViewController: UIViewController {
     
     func showError() {
         // Display the following for any URL errors
+    }
+    
+    // Begin loading webview progress
+    func startLoadingWebView() {
+        self.progressView.progress = 0.0
+        self.progressLabelCounter = self.progressView.progress * 100.0
+        self.progressLabel.text = String("\(progressLabelCounter)%")
+        self.progressBool = false
+        self.myTimer = NSTimer.scheduledTimerWithTimeInterval(0.01667, target: self, selector: "timerCallback", userInfo: nil, repeats: true)
+    }
+    
+    // Finished loading webview progress
+    func finishLoadingWebView() {
+        self.progressBool = true
+    }
+    
+    // And a timer callback
+    func timerCallback() {
+        if self.progressBool {
+            if self.progressView.progress >= 1 {
+                self.myTimer.invalidate()
+            } else {
+                self.progressView.progress += 0.1
+                self.progressLabelCounter = self.progressView.progress * 100.0
+                self.progressLabel.text = String("\(progressLabelCounter)%")
+            }
+        }   else {
+            self.progressView.progress += 0.05
+            self.progressLabelCounter = self.progressView.progress * 100.0
+            if self.progressView.progress >= 0.95 {
+                self.progressView.progress = 0.95
+                self.progressLabelCounter = self.progressView.progress * 100.0
+                self.progressLabel.text = String("\(progressLabelCounter)%")
+            }
+        }
     }
     
     override func viewDidLoad() {
