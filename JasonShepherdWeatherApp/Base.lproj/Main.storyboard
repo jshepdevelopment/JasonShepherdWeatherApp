@@ -18,15 +18,18 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" alpha="0.10000000000000001" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="appBackground.png" translatesAutoresizingMaskIntoConstraints="NO" id="lTT-kB-Vhj">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="188"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="258"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9BB-fd-Gbz">
+                                <rect key="frame" x="215" y="150" width="60" height="60"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="s7l-gM-eRb">
-                                <rect key="frame" x="9" y="14" width="161" height="21"/>
+                                <rect key="frame" x="9" y="14" width="183" height="21"/>
                                 <attributedString key="attributedText">
                                     <fragment content="Weather Master Pro">
                                         <attributes>
                                             <color key="NSColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                            <font key="NSFont" size="17" name="MarkerFelt-Thin"/>
+                                            <font key="NSFont" size="19" name="MarkerFelt-Thin"/>
                                         </attributes>
                                     </fragment>
                                 </attributedString>
@@ -67,13 +70,14 @@
                                 </attributedString>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tRR-jf-iqK">
-                                <rect key="frame" x="9" y="150" width="302" height="51"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="5" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tRR-jf-iqK">
+                                <rect key="frame" x="9" y="150" width="198" height="108"/>
                                 <attributedString key="attributedText">
-                                    <fragment content="Label">
+                                    <fragment content="Press the find button when ready.">
                                         <attributes>
                                             <color key="NSColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                             <font key="NSFont" size="15" name="MarkerFelt-Thin"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                         </attributes>
                                     </fragment>
                                 </attributedString>
@@ -127,22 +131,46 @@
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <webView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PLQ-bT-n7x">
-                                <rect key="frame" x="8" y="209" width="302" height="215"/>
-                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="deviceRGB"/>
-                            </webView>
                             <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" fixedFrame="YES" progress="0.10000000000000001" translatesAutoresizingMaskIntoConstraints="NO" id="3FY-5y-1cd">
-                                <rect key="frame" x="-14" y="442" width="221" height="2"/>
+                                <rect key="frame" x="14" y="442" width="218" height="2"/>
                                 <color key="tintColor" red="1" green="0.40000000600000002" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
                             </progressView>
+                            <webView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PLQ-bT-n7x">
+                                <rect key="frame" x="9" y="274" width="302" height="150"/>
+                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="deviceRGB"/>
+                            </webView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="high.png" translatesAutoresizingMaskIntoConstraints="NO" id="tbh-Es-YXA">
+                                <rect key="frame" x="344" y="267" width="16" height="35"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="high.png" translatesAutoresizingMaskIntoConstraints="NO" id="me0-5n-0gh">
+                                <rect key="frame" x="217" y="226" width="16" height="32"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="low.png" translatesAutoresizingMaskIntoConstraints="NO" id="JaZ-0g-NIY">
+                                <rect key="frame" x="267" y="226" width="16" height="32"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="S9p-WJ-SLh">
+                                <rect key="frame" x="286" y="237" width="24" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="W3N-O1-I19">
+                                <rect key="frame" x="235" y="237" width="24" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
                         <outlet property="cityNameField" destination="k4E-0N-mBr" id="qad-mA-ywa"/>
+                        <outlet property="highLabel" destination="W3N-O1-I19" id="UIV-hW-8EV"/>
+                        <outlet property="lowLabel" destination="S9p-WJ-SLh" id="mzF-PR-WNt"/>
                         <outlet property="progressLabel" destination="Scg-oW-aMT" id="yhR-X5-JHp"/>
                         <outlet property="progressView" destination="3FY-5y-1cd" id="dSl-ng-JfW"/>
+                        <outlet property="weatherImageView" destination="9BB-fd-Gbz" id="Glq-tz-TjA"/>
                         <outlet property="weatherResultLabel" destination="tRR-jf-iqK" id="oh3-ID-CXr"/>
                         <outlet property="webView" destination="PLQ-bT-n7x" id="5tE-NH-t7b"/>
                         <outlet property="zipCodeField" destination="Mh0-En-mfA" id="xqA-l5-DKp"/>
@@ -155,5 +183,7 @@
     </scenes>
     <resources>
         <image name="appBackground.png" width="500" height="350"/>
+        <image name="high.png" width="16" height="32"/>
+        <image name="low.png" width="16" height="32"/>
     </resources>
 </document>

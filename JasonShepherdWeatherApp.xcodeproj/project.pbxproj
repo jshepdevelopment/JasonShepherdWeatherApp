@@ -15,6 +15,13 @@
 		04A2A93F1C970C2D00EE316E /* JasonShepherdWeatherAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A2A93E1C970C2D00EE316E /* JasonShepherdWeatherAppTests.swift */; };
 		04A2A94A1C970C2D00EE316E /* JasonShepherdWeatherAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A2A9491C970C2D00EE316E /* JasonShepherdWeatherAppUITests.swift */; };
 		04A2A95F1C99A5B300EE316E /* appBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = 04A2A95E1C99A5B300EE316E /* appBackground.png */; };
+		04A2A9631C9C90AC00EE316E /* snow.png in Resources */ = {isa = PBXBuildFile; fileRef = 04A2A9601C9C90AC00EE316E /* snow.png */; };
+		04A2A9641C9C90AC00EE316E /* sunny.png in Resources */ = {isa = PBXBuildFile; fileRef = 04A2A9611C9C90AC00EE316E /* sunny.png */; };
+		04A2A9651C9C90AC00EE316E /* sunrain.png in Resources */ = {isa = PBXBuildFile; fileRef = 04A2A9621C9C90AC00EE316E /* sunrain.png */; };
+		04A2A9671C9C90D700EE316E /* low.png in Resources */ = {isa = PBXBuildFile; fileRef = 04A2A9661C9C90D700EE316E /* low.png */; };
+		04A2A9691C9C90E500EE316E /* rainy.png in Resources */ = {isa = PBXBuildFile; fileRef = 04A2A9681C9C90E500EE316E /* rainy.png */; };
+		04A2A96B1C9C90FD00EE316E /* high.png in Resources */ = {isa = PBXBuildFile; fileRef = 04A2A96A1C9C90FD00EE316E /* high.png */; };
+		04A2A96D1C9C911200EE316E /* cloudy.png in Resources */ = {isa = PBXBuildFile; fileRef = 04A2A96C1C9C911200EE316E /* cloudy.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +56,13 @@
 		04A2A9491C970C2D00EE316E /* JasonShepherdWeatherAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JasonShepherdWeatherAppUITests.swift; sourceTree = "<group>"; };
 		04A2A94B1C970C2D00EE316E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		04A2A95E1C99A5B300EE316E /* appBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = appBackground.png; sourceTree = "<group>"; };
+		04A2A9601C9C90AC00EE316E /* snow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = snow.png; sourceTree = "<group>"; };
+		04A2A9611C9C90AC00EE316E /* sunny.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sunny.png; sourceTree = "<group>"; };
+		04A2A9621C9C90AC00EE316E /* sunrain.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sunrain.png; sourceTree = "<group>"; };
+		04A2A9661C9C90D700EE316E /* low.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = low.png; sourceTree = "<group>"; };
+		04A2A9681C9C90E500EE316E /* rainy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = rainy.png; sourceTree = "<group>"; };
+		04A2A96A1C9C90FD00EE316E /* high.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = high.png; sourceTree = "<group>"; };
+		04A2A96C1C9C911200EE316E /* cloudy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cloudy.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -132,6 +146,13 @@
 			isa = PBXGroup;
 			children = (
 				04A2A95E1C99A5B300EE316E /* appBackground.png */,
+				04A2A96A1C9C90FD00EE316E /* high.png */,
+				04A2A9661C9C90D700EE316E /* low.png */,
+				04A2A96C1C9C911200EE316E /* cloudy.png */,
+				04A2A9681C9C90E500EE316E /* rainy.png */,
+				04A2A9601C9C90AC00EE316E /* snow.png */,
+				04A2A9611C9C90AC00EE316E /* sunny.png */,
+				04A2A9621C9C90AC00EE316E /* sunrain.png */,
 			);
 			name = assets;
 			sourceTree = "<group>";
@@ -241,7 +262,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				04A2A9341C970C2C00EE316E /* LaunchScreen.storyboard in Resources */,
+				04A2A96B1C9C90FD00EE316E /* high.png in Resources */,
+				04A2A9691C9C90E500EE316E /* rainy.png in Resources */,
+				04A2A9641C9C90AC00EE316E /* sunny.png in Resources */,
+				04A2A9631C9C90AC00EE316E /* snow.png in Resources */,
+				04A2A96D1C9C911200EE316E /* cloudy.png in Resources */,
 				04A2A95F1C99A5B300EE316E /* appBackground.png in Resources */,
+				04A2A9671C9C90D700EE316E /* low.png in Resources */,
+				04A2A9651C9C90AC00EE316E /* sunrain.png in Resources */,
 				04A2A9311C970C2C00EE316E /* Assets.xcassets in Resources */,
 				04A2A92F1C970C2C00EE316E /* Main.storyboard in Resources */,
 			);

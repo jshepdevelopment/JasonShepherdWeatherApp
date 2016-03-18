@@ -20,6 +20,9 @@ class ViewController: UIViewController {
     var progressLabelCounter: Float!
     
     // Outlets to UI elements
+    @IBOutlet weak var highLabel: UILabel!
+    @IBOutlet weak var lowLabel: UILabel!
+    @IBOutlet weak var weatherImageView: UIImageView!
     @IBOutlet weak var webView: UIWebView!
     @IBOutlet weak var progressLabel: UILabel!
     @IBOutlet weak var progressView: UIProgressView!
@@ -85,8 +88,6 @@ class ViewController: UIViewController {
                                 truncatedCityString = cityString.substringToIndex(cityStringLength)
                                 print("Truncated string = \(truncatedCityString)")
                                 
-                                
-                                //cityNameField.text = cityString
                             }
                         }
                 
@@ -154,6 +155,8 @@ class ViewController: UIViewController {
                     // Check if for any session error
                     var urlError = false
                     var weather = ""
+                    var highTemp = ""
+                    var lowTemp = ""
                     
                     // Get successful dispplay contents
                     if error == nil {
@@ -168,6 +171,20 @@ class ViewController: UIViewController {
                             weather = weather.stringByReplacingOccurrencesOfString("&deg;", withString: "°")
                             
                         }
+                        
+                        let highContentArray = weather.componentsSeparatedByString("max ")
+                        if highContentArray.count > 0 {
+                            var highArray = highContentArray[1].componentsSeparatedByString("°")
+                            highTemp = highArray[0] as String
+                        }
+                        
+                        let lowContentArray = weather.componentsSeparatedByString("min ")
+                        if lowContentArray.count > 0 {
+                            var lowArray = lowContentArray[1].componentsSeparatedByString("°")
+                            lowTemp = lowArray[0] as String
+                        }
+                        
+                        
                     }
                     else {
                         // Error
@@ -182,17 +199,45 @@ class ViewController: UIViewController {
                         }
                         else {
                             
-                            // Everything good, so populate label and webView
+                            // Everything good, so populate labels and webView
                             self.weatherResultLabel.text = weather
+                            self.highLabel.text = highTemp
+                            self.lowLabel.text = lowTemp
                             self.startLoadingWebView()
                             self.webView.loadRequest(webViewRequest)
                             self.finishLoadingWebView()
+                            
+                            // Check for weather variations and update image
+                            if ((weather.rangeOfString("moderate rain")) != nil) {
+                                self.weatherImageView.image = UIImage(named: "sunrain.png")
+                            }
+                            
+                            if ((weather.rangeOfString("Light rain")) != nil) {
+                                self.weatherImageView.image = UIImage(named: "sunrain.png")
+                            }
+                            
+                            if ((weather.rangeOfString("cloudy")) != nil) {
+                                self.weatherImageView.image = UIImage(named: "cloudy.png")
+                            }
+
+                            if ((weather.rangeOfString("Mostly dry")) != nil) {
+                                self.weatherImageView.image = UIImage(named: "sunny.png")
+                            }
+                            
+                            if ((weather.rangeOfString("Heavy rain")) != nil) {
+                                self.weatherImageView.image = UIImage(named: "rainy.png")
+                            }
+                            
+                            if ((weather.rangeOfString("snow")) != nil) {
+                                self.weatherImageView.image = UIImage(named: "snow.png")
+                            }
+                            
 
                         }
                     })
                 })
                 task.resume(); // Resuming normal activity
-
+                webView.scrollView.contentOffset = CGPoint(x: 0,y: 600)
                 
             }
             else {
@@ -217,6 +262,7 @@ class ViewController: UIViewController {
     // Finished loading webview progress
     func finishLoadingWebView() {
         self.progressBool = true
+        
     }
     
     // And a timer callback
@@ -224,6 +270,9 @@ class ViewController: UIViewController {
         if self.progressBool {
             if self.progressView.progress >= 1 {
                 self.myTimer.invalidate()
+                self.progressLabel.text = String("Finished!")
+                
+                
             } else {
                 self.progressView.progress += 0.1
                 self.progressLabelCounter = self.progressView.progress * 100.0
